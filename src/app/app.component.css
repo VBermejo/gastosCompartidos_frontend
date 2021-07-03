@@ -1,0 +1,17 @@
+
+main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    /* display: flex;
+    flex-flow: row wrap; */
+    padding: 5px 30px 10px 30px;
+    color: #484752;
+    background-color: rgb(172, 201, 214);
+    border-top: 1px solid #414040;
+    min-height: 70vh;
+}

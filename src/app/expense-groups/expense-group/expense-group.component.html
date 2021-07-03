@@ -1,0 +1,29 @@
+<div>
+    <p>{{group.name}}</p>
+
+    <div gdAreas="title actions" gdGap="0px" gdRows="auto auto" gdAreas.lt-md="title actions" gdRows.lt-md="auto auto">
+        <div gdArea="title">
+            <strong>Gastos:</strong>
+        </div>
+        <div gdArea="actions">
+            <div class="action">
+                <a href="#">Añadir amigo</a>
+            </div>
+            <div class="action">
+                <a href="#">Añadir Gasto</a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start">
+            <!-- fxLayoutGap="20px" -->
+            <ng-container *ngFor="let pay of group.payments">
+                <!-- <app-payment fxFlex="0 1 calc(33.3% - 20px)" fxFlex.lt-md="0 1 calc(50% - 20px)" fxFlex.lt-sm="100%"> -->
+                <app-payment fxFlex="100%" fxFlex.lt-md="100%" fxFlex.lt-sm="100%" [payment] = "pay">
+                </app-payment>
+            </ng-container>
+        </div>
+
+    </div>
+</div>
