@@ -9,22 +9,46 @@ import { FooterComponent } from './footer/footer.component';
 import { ExpenseGroupsComponent } from './expense-groups/expense-groups.component';
 import { ExpenseGroupComponent } from './expense-groups/expense-group/expense-group.component';
 import { PaymentComponent } from './expense-groups/payment/payment.component';
+import { PayGroupService } from './service/pay-group.service';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { BalanceComponent } from './expense-groups/balance/balance.component';
+import { DebtsComponent } from './expense-groups/debts/debts.component';
+import { BalanceService } from './service/balance.service';
+import { DebtsService } from './service/debts.service';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/groups', pathMatch: 'full' },
+ { path: 'groups', component: ExpenseGroupsComponent },
+  // { path: 'directivas', component: DirectivaComponent },
+  // { path: 'clientes', component: ClientesComponent },
+  // { path: 'clientes/page/:page', component: ClientesComponent },
+  // { path: 'clientes/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  // { path: 'clientes/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'facturas/:id', component: DetalleFacturaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_USER' } },
+  // { path: 'facturas/form/:clienteId', component: FacturasComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
+    CardComponent, 
     HeaderComponent,
     FooterComponent,
     ExpenseGroupsComponent,
     ExpenseGroupComponent,
-    PaymentComponent
+    PaymentComponent,
+    BalanceComponent,
+    DebtsComponent
   ],
   imports: [
-    BrowserModule,    
-    FlexLayoutModule
+    BrowserModule,
+    HttpClientModule,
+    FlexLayoutModule,    
+    RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [PayGroupService, BalanceService, DebtsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

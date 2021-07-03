@@ -1,5 +1,45 @@
 .action {
-    display: inline-table;
-    margin-right: 1%;
-    float: right;
+	display: inline-table;
+	margin-right: 1%;
+	float: right;
+}
+
+a {
+	color: rgb(20, 31, 196);
+	text-shadow: 0 0 2px #fff;
+	-webkit-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	transition: all 500ms ease;
+}
+
+a:hover {
+	background: #bd8b40;
+	border-radius: 20px;
+	text-shadow: 1px #082b34;
+}
+
+h2 {
+	color: #bd8b40;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	line-height: 32px;
+	margin: 0 -5px 14px;
+	text-shadow: 2px 2px 2px #082b34;
+}
+
+h3 {
+	color: #7c795d;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 32px;
+	margin: 0 0 2px;
+}
+
+.section {
+	margin-left: 3px;
+}
+.sectionInfo {
+	margin-left: 10px;
 }

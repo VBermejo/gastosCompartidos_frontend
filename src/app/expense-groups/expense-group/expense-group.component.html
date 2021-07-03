@@ -1,29 +1,48 @@
-<div>
-    <p>{{group.name}}</p>
+<div class="group">
+    <h2>{{group.name}}</h2>
 
-    <div gdAreas="title actions" gdGap="0px" gdRows="auto auto" gdAreas.lt-md="title actions" gdRows.lt-md="auto auto">
-        <div gdArea="title">
-            <strong>Gastos:</strong>
-        </div>
-        <div gdArea="actions">
-            <div class="action">
-                <a href="#">Añadir amigo</a>
+    <div gdAreas="expenses | balance | debts" gdGap="15px" gdRows="expenses | balance | debts">
+
+        <div gdArea="expenses" class="section">
+            <div gdAreas="title actions" gdGap="0px" gdRows="auto auto" gdAreas.lt-md="title actions"
+                gdRows.lt-md="auto auto">
+                <div gdArea="title">
+                    <h3 class="sectionTitle">Gastos:</h3>
+                </div>
+                <div gdArea="actions">
+                    <div class="action">
+                        <a href="#">Añadir gasto</a>
+                    </div>
+                    <div class="action">
+                        <a href="#">Añadir amigo</a>
+                    </div>
+                </div>
             </div>
-            <div class="action">
-                <a href="#">Añadir Gasto</a>
+            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start" class="sectionInfo">
+                <!-- fxLayoutGap="20px" -->
+                <ng-container *ngFor="let pay of group.payments">
+                    <!-- <app-payment fxFlex="0 1 calc(33.3% - 20px)" fxFlex.lt-md="0 1 calc(50% - 20px)" fxFlex.lt-sm="100%"> -->
+                    <app-payment fxFlex="100%" fxFlex.lt-md="100%" fxFlex.lt-sm="100%" [payment]="pay">
+                    </app-payment>
+                </ng-container>
             </div>
         </div>
-    </div>
-
-    <div>
-        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start">
-            <!-- fxLayoutGap="20px" -->
-            <ng-container *ngFor="let pay of group.payments">
-                <!-- <app-payment fxFlex="0 1 calc(33.3% - 20px)" fxFlex.lt-md="0 1 calc(50% - 20px)" fxFlex.lt-sm="100%"> -->
-                <app-payment fxFlex="100%" fxFlex.lt-md="100%" fxFlex.lt-sm="100%" [payment] = "pay">
-                </app-payment>
-            </ng-container>
+        <div gdArea="balance" class="section">
+            <h3 class="sectionTitle">Balance:</h3>
+            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start" fxLayoutGap="5px"
+                class="sectionInfo">
+                <app-balance [groupId]="group.id"> 
+                </app-balance>
+            </div>
         </div>
 
+        <div gdArea="debts" class="section">
+            <h3 class="sectionTitle">Deudas:</h3>
+            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start" fxLayoutGap="5px"
+                class="sectionInfo">
+                <app-debts [groupId]="group.id"> 
+                </app-debts>
+            </div>
+        </div>
     </div>
 </div>

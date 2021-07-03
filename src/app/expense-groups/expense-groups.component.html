@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+<div class="container" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
     <ng-container *ngFor="let group of expenseGroups">
         <div fxFlex="100%" class="group"> 
             <app-expense-group [group]="group"></app-expense-group>

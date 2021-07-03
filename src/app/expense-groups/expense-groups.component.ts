@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseGroup } from '../model/expense-group';
 import { Member } from '../model/member';
 import { Payment } from '../model/payment';
+import { PayGroupService } from '../service/pay-group.service';
 
 @Component({
   selector: 'app-expense-groups',
@@ -9,6 +10,7 @@ import { Payment } from '../model/payment';
   styleUrls: ['./expense-groups.component.css']
 })
 export class ExpenseGroupsComponent implements OnInit {
+
 
   private members: Member[] = [
       new Member(1, "Francisco Buyo", "2021-07-01"),
@@ -25,16 +27,21 @@ export class ExpenseGroupsComponent implements OnInit {
   ];
 
 
-  expenseGroups: ExpenseGroup[] = [
-    new ExpenseGroup(1, "prueba1", '2021.-07-03', this.payments),
-    new ExpenseGroup(2, "prueba2", '2021.-07-03', this.payments)
-  ];
+  // expenseGroups: ExpenseGroup[] = [
+  //   new ExpenseGroup(1, "prueba1", '2021.-07-03', this.payments),
+  //   new ExpenseGroup(2, "prueba2", '2021.-07-03', this.payments)
+  // ];
 
   
-
-  constructor() { }
+  expenseGroups: ExpenseGroup[] = [];
+  
+  constructor(private payGroupService: PayGroupService) { }
 
   ngOnInit(): void {
+      this.payGroupService.getGroups(1).subscribe(
+        expenseGroups => this.expenseGroups = expenseGroups
+      );
+
   }
 
 }

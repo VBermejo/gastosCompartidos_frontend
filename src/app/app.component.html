@@ -1,44 +1,12 @@
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-
-</div>
-
-
-<!-- 
-<div 
-  fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
-  <ng-container *ngFor="let _ of [1,2,3,4,5,6]">
-    <app-card fxFlex="0 1 calc(33.3% - 32px)"></app-card>
-  </ng-container>
-</div>
-
-<div 
-  fxLayout="row wrap" 
-  fxLayout.lt-sm="column" 
-  fxLayoutGap="32px" 
-  fxLayoutAlign="flex-start">
-<ng-container *ngFor="let _ of [1,2,3,4,5,6]">
-  <app-card 
-    fxFlex="0 1 calc(33.3% - 32px)"
-    fxFlex.lt-md="0 1 calc(50% - 32px)"
-    fxFlex.lt-sm="100%"
-  ></app-card>
-</ng-container>
-</div> -->
-
 <div gdAreas="header | content | footer " gdGap="0px" gdRows="auto auto auto"
   gdAreas.lt-md="header |  content | footer" gdRows.lt-md="auto auto auto auto">
-
 
   <div gdArea="header">
     <app-header></app-header>
   </div>
   <div gdArea="content">
     <div class="content" role="main">
-      <input type="hidden" #selection />
-        
-      <app-expense-groups></app-expense-groups>
-
+      <router-outlet></router-outlet>
     </div>
   </div>
   <div gdArea="footer">
