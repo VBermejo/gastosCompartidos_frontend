@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Member } from '../model/member';
 
 
-const PATH: string = 'http://localhost:8102';
+const PATH: string = 'http://10.9.56.187:8102';
 
 @Injectable({
   providedIn: 'root'

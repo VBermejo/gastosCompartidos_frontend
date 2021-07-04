@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Payment } from '../model/payment';
 
-const PATH: string = 'http://localhost:8101';
+const PATH: string = 'http://10.9.56.187:8101';
 
 @Injectable({
   providedIn: 'root'

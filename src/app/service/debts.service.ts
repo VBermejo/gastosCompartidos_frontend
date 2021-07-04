@@ -8,7 +8,7 @@ import { Debt } from '../model/debt';
 })
 export class DebtsService {
 
-  private endpoint: string = 'http://localhost:8104/getDebts/';
+  private endpoint: string = 'http://10.9.56.187:8104/getDebts/';
 
   constructor(private http: HttpClient) { }
 

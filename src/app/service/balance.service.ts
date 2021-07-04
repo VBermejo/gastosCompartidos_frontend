@@ -8,7 +8,7 @@ import { Balance } from '../model/balance';
 })
 export class BalanceService {
 
-  private endpoint: string = 'http://localhost:8104/calculateBalance/';
+  private endpoint: string = 'http://10.9.56.187:8104/calculateBalance/';
 
   constructor(private http: HttpClient) { }
 
