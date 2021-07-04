@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/model/member';
 import { Payment } from 'src/app/model/payment';
 import { PayGroupService } from 'src/app/service/pay-group.service';
 import Swal from 'sweetalert2';
+import { AddPaymentModalService } from './add-payment-modal.service';
 
 @Component({
   selector: 'app-add-payment',
@@ -14,15 +15,17 @@ export class AddPaymentComponent implements OnInit {
 
   public payment: Payment = new Payment(NaN, NaN, "", "", new Member(NaN, "", ""), NaN);
   public title: string = "Añadir nuevo pago";
+
+  @Input()
   public groupId: number;
   public members: Member[];
 
-  constructor(private payGroupService: PayGroupService, private router: Router, private activateRoute: ActivatedRoute) { }
+  constructor(private payGroupService: PayGroupService, public modalService: AddPaymentModalService) { }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe(params => {
-      this.groupId = params['id'];
-    });
+    // this.activateRoute.params.subscribe(params => {
+    //   this.groupId = params['id'];
+    // });
 
     this.payGroupService.getGroupMembers(this.groupId).subscribe(
       response => this.members = response
@@ -31,6 +34,7 @@ export class AddPaymentComponent implements OnInit {
 
   public create():void {
     if (this.payment && this.payment.description && this.payment.amount !== NaN && this.payment.payerId !== NaN) {
+      this.closeModal();
       let waitDialog = Swal.fire({
         title: 'Nuevo gasto',
         html: 'Por favor, espere...',
@@ -39,13 +43,11 @@ export class AddPaymentComponent implements OnInit {
         didOpen: () => {
           Swal.showLoading()
         }
-      });  
-      
-      debugger;
+      }); 
 
       this.payGroupService.addPayment(this.groupId, this.payment).subscribe(
         response => {
-          this.router.navigate(["/groups"]);          
+          // this.router.navigate(["/groups"]);          
           Swal.fire('Nuevo gasto',  `Gasto ${this.payment.description} añadido con éxito`,  'success');
         },
         error => {
@@ -53,6 +55,11 @@ export class AddPaymentComponent implements OnInit {
         }
       );
     }
+  }
+
+    
+  closeModal() {
+    this.modalService.close()
   }
 
 }
