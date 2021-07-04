@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ExpenseGroup } from '../model/expense-group';
-import { Member } from '../model/member';
-import { Payment } from '../model/payment';
+import { MemberService } from '../service/member.service';
 import { PayGroupService } from '../service/pay-group.service';
 
 @Component({
@@ -13,13 +13,22 @@ export class ExpenseGroupsComponent implements OnInit {
 
   expenseGroups: ExpenseGroup[] = [];
   
-  constructor(private payGroupService: PayGroupService) { }
+  constructor(private payGroupService: PayGroupService, private memberService: MemberService, private router: Router) { }
 
   ngOnInit(): void {
-      //TODO obtener memberId from user
-      this.payGroupService.getGroups(1).subscribe(
-        expenseGroups => this.expenseGroups = expenseGroups
-      );
+      let userId: number = Number(sessionStorage.getItem("userId"));
+      if (userId) {
+        this.memberService.getByUser(userId).subscribe(
+          response => {
+            if(response) {
+              this.payGroupService.getGroups(response.id).subscribe(
+                expenseGroups => this.expenseGroups = expenseGroups
+              );
+            }
+          });
+      } else {        
+        this.router.navigate(["/login"]);
+      }
 
   }
 

@@ -1,5 +1,5 @@
 <div gdAreas="header | content | footer " gdGap="0px" gdRows="auto auto auto"
-  gdAreas.lt-md="header |  content | footer" gdRows.lt-md="auto auto auto auto">
+  gdAreas.lt-md="header |  content | footer" gdRows.lt-md="auto auto auto auto" *ngIf="!isLogin">
 
   <div gdArea="header">
     <app-header></app-header>
@@ -13,3 +13,4 @@
     <app-footer></app-footer>
   </div>
 </div>
+<router-outlet *ngIf="isLogin"></router-outlet>

@@ -19,22 +19,14 @@ import { DebtsService } from './service/debts.service';
 import { AddMemberComponent } from './expense-groups/add-member/add-member.component';
 import { AddPaymentComponent } from './expense-groups/add-payment/add-payment.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/groups', pathMatch: 'full' },
   { path: 'groups', component: ExpenseGroupsComponent },
   // { path: 'group/:id/addMember', component: AddMemberComponent },
   // { path: 'group/:id/addPayment', component: AddPaymentComponent },
-
-
-  // { path: 'directivas', component: DirectivaComponent },
-  // { path: 'clientes', component: ClientesComponent },
-  // { path: 'clientes/page/:page', component: ClientesComponent },
-  // { path: 'clientes/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  // { path: 'clientes/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  // { path: 'login', component: LoginComponent },
-  // { path: 'facturas/:id', component: DetalleFacturaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_USER' } },
-  // { path: 'facturas/form/:clienteId', component: FacturasComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } }
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -49,7 +41,8 @@ const routes: Routes = [
     BalanceComponent,
     DebtsComponent,
     AddPaymentComponent,
-    AddMemberComponent
+    AddMemberComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

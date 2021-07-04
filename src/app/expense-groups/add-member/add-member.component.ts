@@ -47,6 +47,8 @@ export class AddMemberComponent implements OnInit {
           Swal.fire('Error',  `Ha ocurrido un error en la creación del nuevo miembro`,  'error');
         }
       );
+    } else {
+      Swal.fire('',  "Los datos son obligatorios",  'warning');
     }
   }
   
