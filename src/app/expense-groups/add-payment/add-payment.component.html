@@ -1,23 +1,26 @@
-<form>
-    <ul class="wrapper">
-      <li class="form-row">
-        <label for="amount">Importe</label>
-        <input type="number" id="amount"/>
-      </li>
-      <li class="form-row">
-        <label for="description">Descripción</label>
-        <input type="text" id="description"/>
-      </li>
-      <li class="form-row">
-        <label for="payer">Pagador</label>
-        <select id="payer">
-          <option value="office" >Taxi Office</option>
-          <option value="town_hall" >Town Hall</option>
-          <option value="telepathy" >We'll Guess!</option>
-        </select>
-      </li>
-      <li class="form-row">
-        <button type="submit">Submit</button>
-      </li>
-    </ul>
+ <form class="myForm" (ngSubmit) = "create()">
+    <div class="row">      
+        <h2>{{title}}</h2>        
+      </div>
+    <div class="row">
+      <div class="column">
+        <div class="input-group">
+            <label for="amount">Importe</label>
+            <input type="number" name="amount" [(ngModel)]="payment.amount" />
+        </div>
+        <div class="input-group">
+            <label for="description">Descripción</label>
+            <input type="text" name="description" [(ngModel)]="payment.description" />
+        </div>
+        <div class="input-group">        
+            <label for="payer">Pagador</label>
+            <select id="payer">
+              <option *ngFor="let member of members" [ngValue]="member" >{{member.name}}</option>
+            </select>
+        </div>
+      </div>      
+    </div>    
+    <div class="row button">
+      <button class="btn" type="submit">Submit</button>      
+    </div>
   </form>

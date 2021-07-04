@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/model/member';
 import { PayGroupService } from 'src/app/service/pay-group.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-member',
@@ -10,19 +11,25 @@ import { PayGroupService } from 'src/app/service/pay-group.service';
 })
 export class AddMemberComponent implements OnInit {
 
-  public member: Member = new Member(0, "", "");
+  public member: Member = new Member(NaN, "", "");
   public title: string = "Añadir amigo al grupo";
-  public groupId: number = 1;
+  public groupId: number;
 
-  constructor(private payGroupService: PayGroupService, private router: Router) {
+  constructor(private payGroupService: PayGroupService, private router: Router, private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activateRoute.params.subscribe(params => {
+      this.groupId = params['id'];
+    });
   }
 
   public create():void {
     this.payGroupService.createMemberAndAddToGroup(this.groupId, this.member).subscribe(
-      response => this.router.navigate(["/groups"])
+      response => {
+        this.router.navigate(["/groups"]);
+        Swal.fire('Nuevo miembro',  `Miembro ${response.name} añadido con éxito`,  'success');
+      }
     );
   }
 
