@@ -10,4 +10,4 @@ RUN npm run build --prod
 #Segundo paso
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/* 
-COPY --from=build-step /app/dist/share-costs-front /usr/share/nginx/html
+COPY --from=build-step /app/share-costs-front /usr/share/nginx/html
