@@ -9,7 +9,7 @@ RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=build-env /app/dist/proyect-name/ /usr/share/nginx/html
+COPY --from=build-env /app/dist/shared-costs-frontend/ /usr/share/nginx/html
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
