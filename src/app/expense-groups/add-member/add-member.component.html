@@ -1,16 +1,33 @@
-<form class="myForm" (ngSubmit) = "create()">
-    <div class="row">      
-        <h2>{{title}}</h2>        
-      </div>
-    <div class="row">
-      <div class="column">
-        <div class="input-group">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" [(ngModel)]="member.name" />
+<div *ngIf="modalService.show" class="container">
+  <div class="simple-modal" tabindex="0">
+    <div class="simple-modal__content">
+
+      <form  (ngSubmit)="create()">
+        <header>
+          <h3>{{title}}</h3>
+          <span (click)="closeModal()">cerrar</span>
+        </header>
+        <div class="modal-main" class="myForm">
+          <!-- <div class="row">      
+            <h2>{{title}}</h2>        
+          </div> -->
+          <div class="row">
+            <div class="column">
+              <div class="input-group">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" [(ngModel)]="member.name" />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row button">
+          <button class="btn" type="submit">Submit</button>      
+        </div> -->
+
         </div>
-      </div>      
-    </div>    
-    <div class="row button">
-      <button class="btn" type="submit">Submit</button>      
+        <footer>
+          <button class="btn" type="submit">Submit</button>
+        </footer>
+      </form>
     </div>
-  </form>
+  </div>
+</div>

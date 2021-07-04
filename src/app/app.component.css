@@ -13,5 +13,6 @@ main {
     color: #484752;
     background-color: rgb(172, 201, 214);
     border-top: 1px solid #414040;
+    border-bottom: 1px solid #414040;
     min-height: 70vh;
 }

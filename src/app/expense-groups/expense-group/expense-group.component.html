@@ -1,3 +1,6 @@
+<app-add-member [groupId] = "group.id"></app-add-member>
+<app-add-payment [groupId] = "group.id"></app-add-payment>
+
 <div class="group">
     <h2>{{group.name}}</h2>
 
@@ -11,10 +14,12 @@
                 </div>
                 <div gdArea="actions">
                     <div class="action">
-                        <a routerLink="/group/{{group.id}}/addPayment">Añadir gasto</a>
+                        <!-- <a routerLink="/group/{{group.id}}/addPayment">Añadir gasto</a> -->
+                        <a [routerLink]="" (click)="openNewPaymenyModal()">Añadir gasto</a> 
                     </div>
                     <div class="action">
-                        <a routerLink="/group/{{group.id}}/addMember">Añadir amigo</a>
+                        <!-- <a routerLink="/group/{{group.id}}/addMember">Añadir amigo</a> -->
+                        <a [routerLink]="" (click)="openNewMemberModal()">Añadir amigo</a> 
                     </div>
                 </div>
             </div>

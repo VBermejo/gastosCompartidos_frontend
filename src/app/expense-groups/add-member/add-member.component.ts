@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Member } from 'src/app/model/member';
 import { PayGroupService } from 'src/app/service/pay-group.service';
 import Swal from 'sweetalert2';
+import { AddMemberModalService } from './add-member-modal.service';
 
 @Component({
   selector: 'app-add-member',
@@ -13,19 +13,22 @@ export class AddMemberComponent implements OnInit {
 
   public member: Member = new Member(NaN, "", "");
   public title: string = "Añadir amigo al grupo";
+
+  @Input()
   public groupId: number;
 
-  constructor(private payGroupService: PayGroupService, private router: Router, private activateRoute: ActivatedRoute) {
+  constructor(private payGroupService: PayGroupService, public modalService: AddMemberModalService) {
   }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe(params => {
-      this.groupId = params['id'];
-    });
+    // this.activateRoute.params.subscribe(params => {
+    //   this.groupId = params['id'];
+    // });
   }
 
   public create():void {
     if (this.member && this.member.name !== '') {
+      this.closeModal();
       let waitDialog = Swal.fire({
         title: 'Nuevo miembro',
         html: 'Por favor, espere...',
@@ -34,11 +37,10 @@ export class AddMemberComponent implements OnInit {
         didOpen: () => {
           Swal.showLoading()
         }
-      });  
-  
+      });      
       this.payGroupService.createMemberAndAddToGroup(this.groupId, this.member).subscribe(
         response => {
-          this.router.navigate(["/groups"]);          
+          // this.router.navigate(["/groups"]);          
           Swal.fire('Nuevo miembro',  `Miembro ${response.name} añadido con éxito`,  'success');
         },
         error => {
@@ -46,6 +48,10 @@ export class AddMemberComponent implements OnInit {
         }
       );
     }
+  }
+  
+  closeModal() {
+    this.modalService.close()
   }
 
 }
