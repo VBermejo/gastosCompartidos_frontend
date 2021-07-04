@@ -25,12 +25,27 @@ export class AddMemberComponent implements OnInit {
   }
 
   public create():void {
-    this.payGroupService.createMemberAndAddToGroup(this.groupId, this.member).subscribe(
-      response => {
-        this.router.navigate(["/groups"]);
-        Swal.fire('Nuevo miembro',  `Miembro ${response.name} añadido con éxito`,  'success');
-      }
-    );
+    if (this.member && this.member.name !== '') {
+      let waitDialog = Swal.fire({
+        title: 'Nuevo miembro',
+        html: 'Por favor, espere...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });  
+  
+      this.payGroupService.createMemberAndAddToGroup(this.groupId, this.member).subscribe(
+        response => {
+          this.router.navigate(["/groups"]);          
+          Swal.fire('Nuevo miembro',  `Miembro ${response.name} añadido con éxito`,  'success');
+        },
+        error => {
+          Swal.fire('Error',  `Ha ocurrido un error en la creación del nuevo miembro`,  'error');
+        }
+      );
+    }
   }
 
 }

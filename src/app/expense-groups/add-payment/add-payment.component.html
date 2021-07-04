@@ -6,16 +6,16 @@
       <div class="column">
         <div class="input-group">
             <label for="amount">Importe</label>
-            <input type="number" name="amount" [(ngModel)]="payment.amount" />
+            <input type="number" min="0" step=".01" name="amount" [(ngModel)]="payment.amount" />
         </div>
         <div class="input-group">
             <label for="description">Descripción</label>
             <input type="text" name="description" [(ngModel)]="payment.description" />
         </div>
         <div class="input-group">        
-            <label for="payer">Pagador</label>
-            <select id="payer">
-              <option *ngFor="let member of members" [ngValue]="member" >{{member.name}}</option>
+            <label for="payerId">Pagador</label>
+            <select name="payerId" [(ngModel)]="payment.payerId">
+              <option *ngFor="let member of members" [ngValue]="member.id">{{member.name}}</option>
             </select>
         </div>
       </div>      

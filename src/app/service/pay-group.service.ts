@@ -1,8 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { ExpenseGroup } from '../model/expense-group';
 import { Member } from '../model/member';
+import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { Payment } from '../model/payment';
 
 const PATH: string = 'http://localhost:8101';
 
@@ -13,7 +16,8 @@ export class PayGroupService {
 
   private getGroupsEndpoint: string = `${PATH}/getByMember`;
   private createMemberEndpoint: string = `${PATH}/createMemberAndAddToGroup`;
-  private getGroupMembersEndpoint: string = `${PATH}/getGroupMembersEndpoint`;
+  private getGroupMembersEndpoint: string = `${PATH}/getGroupMembers`;
+  private addPaymentEndpoint: string = `${PATH}/addPayment`;
 
   private httpHeaders = new HttpHeaders({"Content-Type": "application/json"});
 
@@ -24,11 +28,14 @@ export class PayGroupService {
   }
 
   createMemberAndAddToGroup(groupId: number, member: Member): Observable<Member> {
-    return this.http.post<Member>(`${this.createMemberEndpoint}/${groupId}`, member, {headers: this.httpHeaders});
+    return this.http.post<Member>(`${this.createMemberEndpoint}/${groupId}`, member, {headers: this.httpHeaders})
   }
 
   getGroupMembers(groupId: number) : Observable<Member[]> {
     return this.http.get<Member[]>(`${this.getGroupMembersEndpoint}/${groupId}`);
 
+  }
+  addPayment(groupId: number, payment: Payment) : Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.addPaymentEndpoint}/${groupId}`, payment, {headers: this.httpHeaders});
   }
 }
