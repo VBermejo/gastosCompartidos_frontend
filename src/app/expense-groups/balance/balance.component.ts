@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Balance } from 'src/app/model/balance';
 import { BalanceService } from 'src/app/service/balance.service';
+import Utils from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-balance',
@@ -21,5 +22,9 @@ export class BalanceComponent implements OnInit {
       balance => this.balance = balance
     );
   }
+
+  public formatedCash(balance: Balance) :string {
+    return Utils.formatAmount(balance.amount);        
+  } 
 
 }

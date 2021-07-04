@@ -1,3 +1,19 @@
 <ng-container *ngFor="let debt of debts">
-    <div fxLayoutAlign="start start">{{debt.from.name}} --> {{debt.to.name}} ({{debt.cash}}€)</div>
+    <div gdAreas="from arrow to cash action" gdGap="5px" gdRows="from arrow to cash action">
+        <div gdArea="from">
+            {{debt.from.name}}
+        </div>
+        <div gdArea="arrow">
+            →
+        </div>
+        <div gdArea="to">
+            {{debt.to.name}}
+        </div>
+        <div gdArea="cash">
+            ({{formatedCash(debt)}})
+        </div>
+        <!-- <div gdArea="action">
+            <a href="#">Saldar</a>
+        </div> -->
+    </div>
 </ng-container>

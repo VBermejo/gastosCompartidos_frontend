@@ -1,0 +1,12 @@
+label {
+    margin: 0px 1vh;
+    font-weight: bold;  
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}

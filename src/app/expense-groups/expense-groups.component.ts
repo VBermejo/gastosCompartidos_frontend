@@ -38,6 +38,7 @@ export class ExpenseGroupsComponent implements OnInit {
   constructor(private payGroupService: PayGroupService) { }
 
   ngOnInit(): void {
+      //TODO obtener memberId from user
       this.payGroupService.getGroups(1).subscribe(
         expenseGroups => this.expenseGroups = expenseGroups
       );

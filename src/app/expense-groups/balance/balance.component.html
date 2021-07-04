@@ -1,3 +1,11 @@
 <ng-container *ngFor="let balanceItem of balance">
-    <div fxLayoutAlign="start start">{{balanceItem.member.name}} {{balanceItem.amount}}</div>
+    <div gdAreas="athor amount" gdGap="15px" gdRows="athor amount">
+        <div gdArea="athor">
+            {{balanceItem.member.name}}
+        </div>
+        <label gdArea="amount" fxLayoutAlign="end start"
+            [ngClass]="{'negative': balanceItem.amount < 0, 'positive' : balanceItem.amount > 0 }">
+            {{formatedCash(balanceItem)}}
+        </label>
+    </div>
 </ng-container>

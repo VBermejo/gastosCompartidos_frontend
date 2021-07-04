@@ -14,6 +14,9 @@ export class ExpenseGroupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (this.group) {
+        this.group.payments.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1));
+    }
   }
 
 }

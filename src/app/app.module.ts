@@ -16,10 +16,14 @@ import { BalanceComponent } from './expense-groups/balance/balance.component';
 import { DebtsComponent } from './expense-groups/debts/debts.component';
 import { BalanceService } from './service/balance.service';
 import { DebtsService } from './service/debts.service';
+import { AddMemberComponent } from './expense-groups/add-member/add-member.component';
+import { AddPaymentComponent } from './expense-groups/add-payment/add-payment.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', redirectTo: '/groups', pathMatch: 'full' },
- { path: 'groups', component: ExpenseGroupsComponent },
+  { path: 'groups', component: ExpenseGroupsComponent },
+  { path: 'group/:id/addMember', component: AddMemberComponent },
   // { path: 'directivas', component: DirectivaComponent },
   // { path: 'clientes', component: ClientesComponent },
   // { path: 'clientes/page/:page', component: ClientesComponent },
@@ -40,13 +44,16 @@ const routes: Routes = [
     ExpenseGroupComponent,
     PaymentComponent,
     BalanceComponent,
-    DebtsComponent
+    DebtsComponent,
+    AddPaymentComponent,
+    AddMemberComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FlexLayoutModule,    
     RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [PayGroupService, BalanceService, DebtsService],
   bootstrap: [AppComponent]

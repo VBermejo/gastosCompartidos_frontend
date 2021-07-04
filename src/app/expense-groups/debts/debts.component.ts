@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Debt } from 'src/app/model/debt';
 import { DebtsService } from 'src/app/service/debts.service';
+import Utils from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-debts',
@@ -22,5 +23,9 @@ export class DebtsComponent implements OnInit {
       debts => this.debts = debts
     );
   }
+
+  public formatedCash(debt: Debt) :string {
+    return Utils.formatAmount(debt.cash);        
+  } 
 
 }
