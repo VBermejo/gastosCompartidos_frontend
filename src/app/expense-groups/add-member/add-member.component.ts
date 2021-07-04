@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Member } from 'src/app/model/member';
+import { PayGroupService } from 'src/app/service/pay-group.service';
 
 @Component({
   selector: 'app-add-member',
@@ -8,19 +10,20 @@ import { Member } from 'src/app/model/member';
 })
 export class AddMemberComponent implements OnInit {
 
-  public member: Member;
+  public member: Member = new Member(0, "", "");
   public title: string = "Añadir amigo al grupo";
+  public groupId: number = 1;
 
-  constructor() {
-    this.member = new Member();
+  constructor(private payGroupService: PayGroupService, private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
   public create():void {
-    console.log("clicked!");
-    console.log(this.member);
+    this.payGroupService.createMemberAndAddToGroup(this.groupId, this.member).subscribe(
+      response => this.router.navigate(["/groups"])
+    );
   }
 
 }

@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/groups', pathMatch: 'full' },
   { path: 'groups', component: ExpenseGroupsComponent },
   { path: 'group/:id/addMember', component: AddMemberComponent },
+  { path: 'group/:id/addPayment', component: AddPaymentComponent },
   // { path: 'directivas', component: DirectivaComponent },
   // { path: 'clientes', component: ClientesComponent },
   // { path: 'clientes/page/:page', component: ClientesComponent },
