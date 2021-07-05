@@ -24,7 +24,7 @@
         <div class="input-group">        
             <label for="payerId">Pagador</label>
             <select name="payerId" [(ngModel)]="payment.payerId">
-              <option *ngFor="let member of members" [ngValue]="member.id">{{member.name}}</option>
+              <option *ngFor="let member of modalService.members.get(modalService.groupId)" [ngValue]="member.id">{{member.name}}</option>
             </select>
         </div>
       </div>      

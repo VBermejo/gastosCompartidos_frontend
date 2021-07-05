@@ -38,7 +38,7 @@ export class AddMemberComponent implements OnInit {
           Swal.showLoading()
         }
       });      
-      this.payGroupService.createMemberAndAddToGroup(this.groupId, this.member).subscribe(
+      this.payGroupService.createMemberAndAddToGroup(this.modalService.groupId, this.member).subscribe(
         response => {
           // this.router.navigate(["/groups"]);          
           Swal.fire('Nuevo miembro',  `Miembro ${response.name} añadido con éxito`,  'success');
@@ -53,6 +53,7 @@ export class AddMemberComponent implements OnInit {
   }
   
   closeModal() {
+    this.member = new Member(NaN, "", "");
     this.modalService.close()
   }
 

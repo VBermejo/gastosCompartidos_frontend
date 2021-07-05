@@ -1,16 +1,22 @@
-FROM node:14 AS build-env
+FROM node:latest as node
+
+ARG ENV=prod
+ARG APP=shared-costs-frontend
+
+ENV ENV ${ENV}
+ENV APP ${APP}
 
 WORKDIR /app
+COPY ./ /app/
 
-COPY . ./
+# Instala y construye el Angular App
+RUN npm ci
+RUN npm run build --prod
+RUN mv /app/dist/${APP}/* /app/dist/
 
-RUN npm install
-RUN npm run build
+# Angular app construida, la vamos a hostear un server production, este es Nginx
 
-FROM nginx:alpine
+FROM nginx:1.13.8-alpine
 
-COPY --from=build-env /app/dist/shared-costs-frontend/ /usr/share/nginx/html
-
+COPY --from=node /app/dist/ /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
-CMD ["nginx", "-g", "daemon off;"]

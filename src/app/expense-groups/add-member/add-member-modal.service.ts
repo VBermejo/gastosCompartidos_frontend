@@ -1,4 +1,6 @@
+import { group } from '@angular/animations';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -6,14 +8,17 @@ import { Injectable } from '@angular/core';
 export class AddMemberModalService {
 
   show: boolean = false;
+  groupId: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  open() {
+  open(groupId: number) {
     this.show = true;
+    this.groupId = groupId;
   }
 
   close () {
     this.show = false;
+    // this.router.navigate(["/login"]);
   }
 }

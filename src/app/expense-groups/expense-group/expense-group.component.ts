@@ -24,12 +24,12 @@ export class ExpenseGroupComponent implements OnInit {
   }
 
 
-  openNewMemberModal() {
-    this.addMemberModalService.open();
+  openNewMemberModal(groupId: number) {
+    this.addMemberModalService.open(groupId);
   }
 
-  openNewPaymenyModal() {
-    this.addPaymenModalService.open();
+  openNewPaymenyModal(groupId: number) {
+    this.addPaymenModalService.open(groupId);
   }
 
 }

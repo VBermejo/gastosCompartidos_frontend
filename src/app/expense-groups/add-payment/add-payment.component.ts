@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/model/member';
 import { Payment } from 'src/app/model/payment';
 import { PayGroupService } from 'src/app/service/pay-group.service';
@@ -18,7 +17,6 @@ export class AddPaymentComponent implements OnInit {
 
   @Input()
   public groupId: number;
-  public members: Member[];
 
   constructor(private payGroupService: PayGroupService, public modalService: AddPaymentModalService) { }
 
@@ -26,10 +24,6 @@ export class AddPaymentComponent implements OnInit {
     // this.activateRoute.params.subscribe(params => {
     //   this.groupId = params['id'];
     // });
-
-    this.payGroupService.getGroupMembers(this.groupId).subscribe(
-      response => this.members = response
-    );
   }
 
   public create():void {
@@ -45,7 +39,7 @@ export class AddPaymentComponent implements OnInit {
         }
       }); 
 
-      this.payGroupService.addPayment(this.groupId, this.payment).subscribe(
+      this.payGroupService.addPayment(this.modalService.groupId, this.payment).subscribe(
         response => {
           // this.router.navigate(["/groups"]);          
           Swal.fire('Nuevo gasto',  `Gasto ${this.payment.description} añadido con éxito`,  'success');
@@ -59,6 +53,7 @@ export class AddPaymentComponent implements OnInit {
 
     
   closeModal() {
+    this.payment = new Payment(NaN, NaN, "", "", new Member(NaN, "", ""), NaN);
     this.modalService.close()
   }
 

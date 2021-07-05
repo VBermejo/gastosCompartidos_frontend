@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   public user: User = new User(NaN, "", "");
 
   ngOnInit(): void {
+    if (sessionStorage.getItem("userId")) {      
+      this.router.navigate(["/groups"]); 
+    }
   }
 
   public login(): void {
