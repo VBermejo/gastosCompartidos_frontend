@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Member } from 'src/app/model/member';
 import { PayGroupService } from 'src/app/service/pay-group.service';
 import Swal from 'sweetalert2';
@@ -17,7 +18,7 @@ export class AddMemberComponent implements OnInit {
   @Input()
   public groupId: number;
 
-  constructor(private payGroupService: PayGroupService, public modalService: AddMemberModalService) {
+  constructor(private payGroupService: PayGroupService, public modalService: AddMemberModalService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,9 +40,9 @@ export class AddMemberComponent implements OnInit {
         }
       });      
       this.payGroupService.createMemberAndAddToGroup(this.modalService.groupId, this.member).subscribe(
-        response => {
-          // this.router.navigate(["/groups"]);          
+        response => {      
           Swal.fire('Nuevo miembro',  `Miembro ${response.name} añadido con éxito`,  'success');
+          this.router.navigate(["/login"]);    
         },
         error => {
           Swal.fire('Error',  `Ha ocurrido un error en la creación del nuevo miembro`,  'error');

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Member } from 'src/app/model/member';
 import { Payment } from 'src/app/model/payment';
 import { PayGroupService } from 'src/app/service/pay-group.service';
@@ -18,7 +19,7 @@ export class AddPaymentComponent implements OnInit {
   @Input()
   public groupId: number;
 
-  constructor(private payGroupService: PayGroupService, public modalService: AddPaymentModalService) { }
+  constructor(private payGroupService: PayGroupService, public modalService: AddPaymentModalService, private router: Router) { }
 
   ngOnInit(): void {
     // this.activateRoute.params.subscribe(params => {
@@ -41,8 +42,9 @@ export class AddPaymentComponent implements OnInit {
 
       this.payGroupService.addPayment(this.modalService.groupId, this.payment).subscribe(
         response => {
-          // this.router.navigate(["/groups"]);          
-          Swal.fire('Nuevo gasto',  `Gasto ${this.payment.description} añadido con éxito`,  'success');
+          Swal.fire('Nuevo gasto',  `Gasto ${this.payment.description} añadido con éxito`,  'success');          
+          this.payment = new Payment(NaN, NaN, "", "", new Member(NaN, "", ""), NaN);
+          this.router.navigate(["/login"]);
         },
         error => {
           Swal.fire('Error',  `Ha ocurrido un error en la creación del gasto`,  'error');
@@ -53,7 +55,6 @@ export class AddPaymentComponent implements OnInit {
 
     
   closeModal() {
-    this.payment = new Payment(NaN, NaN, "", "", new Member(NaN, "", ""), NaN);
     this.modalService.close()
   }
 
